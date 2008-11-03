@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="gcross.20081101122204.1" str_leo_pos="3,0,0,3"><vh>@chapters</vh></v>
+<v t="gcross.20081101122204.1" str_leo_pos="3,0,0,9"><vh>@chapters</vh></v>
 <v t="gcross.20081101124804.1"><vh>@button Count Words</vh></v>
 <v t="gcross.20081101122204.7"><vh>@settings</vh>
 <v t="gcross.20081101122204.8"><vh>@font</vh></v>
