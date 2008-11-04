@@ -1,0 +1,521 @@
+% \iffalse meta-comment
+% This package is in the public domain. It comes with no guarantees
+% and no reserved rights. You can use or modify this package at your
+% own risk.
+%
+% Originally written by: Aleksander Simonic
+% Currently maintained by: Stefan Ulrich <ulrich@cis.uni-muenchen.de>
+% 
+%<*driver>
+\ProvidesFile{srcltx.drv}[2001/04/01 v1.0 Driver for srcltx package]
+\documentclass[draft]{ltxdoc}
+\usepackage{tabularx,calc}
+\usepackage[inactive,nopar]{srcltx}
+\def\MainFile{srcltx.dtx}
+\newcommand\package{\textsf}
+\newcommand\file{\texttt}
+\renewcommand\topfraction{.85}
+\renewcommand\textfraction{.15}
+\renewcommand\floatpagefraction{.66}
+\newenvironment{descr}{%
+  \renewcommand\descriptionlabel[1]{\hspace\labelsep\normalfont##1}
+  \begin{description}
+}{%
+  \end{description}
+}
+\newcommand\Com[1]{\texttt{\bslash #1}}
+\pagestyle{headings}
+\frenchspacing
+% nicer fonts:
+\let\sldefault\itdefault
+\let\MakeUppercase\relax
+
+\GetFileInfo{srcltx.sty}
+\OnlyDescription
+
+\begin{document}
+\title{\package{srcltx.sty} $\cdot$ \package{srctex.sty}}
+\author{\normalsize Originally written by Aleksander Simonic\\
+          \normalsize Currenlty maintained by Stefan Ulrich\\ \normalsize \texttt{<ulrich@cis.uni-muenchen.de>}}
+\date{\fileversion, \filedate}
+\maketitle
+
+\begin{abstract}\noindent
+This package provides source special insertion into \file{.dvi} files,
+allowing to jump from the \file{.dvi} file to the \file{.tex} source
+and back (given a \file{.dvi} viewer that supports this, such as Yap
+or Xdvi(k)).  In addition, it provides hooks for error tracking
+from the \file{.log} file with the WinEdt shell.
+\end{abstract}
+
+\tableofcontents
+
+\section{Usage}
+
+For using the package with \LaTeX, put the line
+
+\noindent
+|\usepackage{srcltx}|
+
+\noindent
+into the preamble of your document.  For \TeX, use
+
+\noindent
+|\input srctex.sty|
+
+\noindent
+instead.  This will cause source specials to be inserted at every
+start of a paragraph of your document and at every math environment
+(see the `Options' section below for how to customize this).  A source
+special is only inserted when there hadn't been one on the same input
+line before.
+
+\textbf{Warning:} \emph{Activating specials may alter the paragraph spacing
+in your document; so be sure to process the final version with
+source specials disabled:}
+|\usepackage[inactive]{srcltx}|.
+
+Source specials can be used for two things: `Reverse search', which
+means that the \file{.dvi} viewer can open a text editor with the file
+(and line) of the corresponding place in the \file{.tex} source, or
+`forward search', which means that the editor invokes the previewer
+with the corresponding place in the \file{.dvi} file. Both the editor
+and the previewer must support this.\footnote{Examples for such
+previewers are YAP, Dviwin or Xdvi(k) (versions $\geq$
+22.38). Examples for suitable editors are WinEdt and (X)Emacs.}
+
+The specials have the following format:
+
+\begin{tabular}{@{}l@{}}
+|\special{src:|\textit{line-number}\textvisiblespace\textit{filename}|}|
+\end{tabular}
+
+
+The package was originally written for use with the WinEdt shell, and
+it offers some special features to customize WinEdt's error
+logging. These are shown in the example in figure~\ref{ex}.
+
+\begin{figure}
+\hrulefill
+\footnotesize\begin{verbatim}
+\documentclass{report}
+\usepackage[active]{srcltx}
+ %
+ % no src specials are written when loading the package as
+ % \usepackage[inactive]{srcltx}
+ %
+ % ... Preamble ...
+ %
+\begin{document}
+ %
+ % ... Title, Author etc. ...
+ %
+\WinEdt{?0000} % Do not process any errors (overful/underful boxes)
+ % ... Preface etc. ...
+\WinEdt{?1111} % Process all types of errors from here on
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\bibliographystyle{plain}
+\bibliography{xbib}
+\end{document}
+\end{verbatim}
+\hrulefill
+\caption{Example for using \package{srcltx.sty} with the WinEdt logging features.}\label{ex}
+\end{figure}
+
+\subsection{Options}
+
+The following options are only available for the \LaTeX2e\ version of
+this package. Unless noted otherwise, the Plain \TeX\ version \package{srctex.sty}
+has a command |\SRC|$\langle$\texttt{foo}$\rangle$ for each option
+$\langle$\texttt{foo}$\rangle$, e.g. |\SRCnopar| replaces the
+`\texttt{nopar}' option.
+\begin{descr}
+
+\item[\texttt{active}\slash\texttt{inactive}]
+        With the \texttt{inactive} option, source specials are disabled, but
+        the source file tracking for WinEdt is still active.
+        
+        The only \texttt{active} option is only useful to override
+        a global \texttt{inactive} option.
+
+        For \package{srctex.sty}, use \Com{SRCOKtrue}\slash\Com{SRCOKfalse}
+        instead.
+
+\item[\texttt{dviwin}] Use specials in a format suitable for dviwin
+         (without a space between the line number and the filename).
+
+\item[\texttt{nopar}] Disable overloading |\everypar|; use this if you
+        experience problems with the default behaviour.
+
+\item[\texttt{nomath}] Disable hooking into |\everymath|; use this if you
+        experience problems with the default behaviour.
+
+\item[\texttt{debug}] Print debugging information on current
+        input file and the input file stack.
+\end{descr}
+
+\subsection{Commands}
+\begin{descr}
+
+\item[\Com{SRCOKtrue}\slash\Com{SRCOKfalse}] You can use these commands to
+         activate\slash deactivate source specials at any place in your
+         document, e.g. when you experience problems with some special
+         constructions (see also `Bugs and Restrictions' in section
+         \ref{sec:bugs}).
+         
+\item[\Com{Input}\marg{filename}] In order to keep track
+         of the current filename, the \LaTeX\ commands
+         \Com{include}\marg{filename} and \Com{input}\marg{filename}
+         are overloaded (note the braces enclosing the filename argument).  The
+         \Com{input} command where the filename can be specified
+         without any delimiters is a \TeX\ primitive command that can
+         not be overloaded easily.  Therefore the package provides an
+         alternative command |\Input| which you should use in Plain
+         \TeX\ instead of \Com{input} if you want the specials in such
+         files to point to the correct filename.  For \LaTeX, you
+         should always use the version with braces:
+         \Com{input}\marg{filename}.  \emph{Note}: For Winedt, you will
+         also need to specify the file name extension (e.g.
+         \file{.tex}) in the argument of this command.
+
+\item[\Com{MainFile}] By default, the \TeX\ primitive |\jobname| contains the name of the
+         ``main'' TeX file, without the filename extension `\file{.tex}'.
+         Accordingly, |\MainFile| is defined as |\jobname.tex|. 
+         If your implementation does already add the extension
+         to |\jobname|, you should redefine this command as follows:
+
+         \noindent\begin{tabular}{@{}l@{}}
+         |\def\MainFile{\jobname}|
+         \end{tabular}
+\end{descr}
+
+\section{Bugs and Restrictions}\label{sec:bugs}
+
+Since this macro package overloads some internal \LaTeX\ commands, it
+is not as robust as one might wish, and may interact badly with other
+packages. Furthermore, the spacing might be altered by using the
+package; so please disable the package by using the \texttt{inactive}
+option before you prepare the final version of your document. As a rule,
+nothing that goes to a printer should contain source specials.
+
+A much more robust method of inserting source specials is to use \TeX\
+(the program) instead of a macro solution. Some \TeX\ implementations
+provide a command line option for this.\footnote{%
+E.g. a `\file{-src}' option is available in Mik\TeX\ from version 1.20 upwards,
+or in te\TeX\ from version beta-20011103 upwards. See the manual of your
+\TeX\ implementation for details on this.}
+You can still load the package with the `\texttt{inactive}' option if
+you want to take advantage of the overloaded input commands, e.g. to
+allow WinEdt to keep track of errors in included source files.
+
+%%% If you observe any incompatibilities between \package{srcltx} and
+%%% other packages, please email me at \texttt{ulrich@cis.uni-muenchen.de}.
+
+In what follows, known incompatibilities and workarounds are listed;
+if you know of any other problems, please email me at
+\texttt{ulrich@cis.uni-muenchen.de}.
+\begin{description}
+\item[{\normalfont\package{soul.sty}:}] Active source specials inside
+        the soul tokenization routine may lead to a `reconstruction failed'
+        error. As a workaround, the internal command |\SOUL@| is overloaded
+        by \package{srcltx}. With the Plain \TeX\ version, \package{srctex.sty}
+        needs to be loaded \emph{after} \package{soul.sty} to make this work.
+\end{description}
+
+
+\section{History}
+
+This package was originally written by A.~Simonic, the WinEdt Shell
+author, to implement a source file tracking and DVI source specials
+for \TeX. D.~P.~Carlisle and B.~K.~Horn have contributed bug
+fixes. Converted to \file{ltxdoc} format by S.~Ulrich.
+
+\DocInput{srcltx.dtx}
+\end{document}
+%</driver>
+% \fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \CheckSum{282}
+% 
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \StopEventually{}
+% \section{Implementation}
+%
+% \changes{v1.2b}{2002/01/23}{SU: Fixed spurious space introduced by uncommented linebreak}
+% \changes{v1.2}{2002/01/21}{SU: Replace stack by macro solution, as suggested by
+%               Alexander Cherepanov (cherepan at mccme.ru).
+%               Also overload LaTeX's \Com{input} command.}
+% \changes{v1.1a}{2001/07/14}{Minor fixes in the documentation.}
+% \changes{v1.1}{2001/03/31}{SU: converted to ltxdoc format, changed the
+%                            push\slash pop commands to use a `real' stack,
+%                            other minor modifications}
+% \changes{v1.002}{1999/09/03}{modified to change \Com{everypar}, by David Carlisle}
+% \changes{v1.001}{1998/12/23}{modified to change \Com{output}, by Berthold Horn}
+%
+%
+%    \begin{macrocode}
+%<*package>
+%<latex>\NeedsTeXFormat{LaTeX2e}
+%<latex>\ProvidesPackage{srcltx}[2002/01/21 v1.2b DVI Search]
+%<tex>\catcode`\@=11
+\newif\ifSRCOK \SRCOKtrue
+\newif\ifsrc@debug@
+\newif\ifsrc@dviwin@
+\newif\ifsrc@everypar@\src@everypar@true
+\newif\ifsrc@everymath@\src@everymath@true
+%<*latex>
+\DeclareOption{active}{\SRCOKtrue}
+\DeclareOption{inactive}{\SRCOKfalse}
+\DeclareOption{debug}{\src@debug@true}
+\DeclareOption{nopar}{\global\src@everypar@false}
+\DeclareOption{nomath}{\global\src@everymath@false}
+%</latex>
+%<*tex>
+\def\SRCdebug{\src@debug@true}
+\def\SRCnopar{\src@everypar@false}
+\def\SRCnomath{\src@everymath@false}
+\def\typeout#1{{\newlinechar`\^^J\message{#1^^J}}}
+\def\AtBeginDocument#1{#1}
+%</tex>
+%<latex>\newcommand*\src@maybe@space{}
+\let\src@maybe@space\space
+%<latex>\DeclareOption{dviwin}{\let\src@maybe@space\relax}
+%    \end{macrocode}
+%    SU: Originally the default was |\ExecuteOptions{inactive}|, but this
+%    was rather unintuitive, so I changed it.
+%    \begin{macrocode}
+%<latex>\ExecuteOptions{active}
+%<latex>\ProcessOptions
+\newcount\src@lastline
+\global\src@lastline=-1
+%<latex>\newcommand*\src@debug{}
+\def\src@debug#1{\ifsrc@debug@\typeout{DBG: |#1|}\fi}
+%    \end{macrocode}
+%    \begin{macro}{\MainFile}
+%    This is for compatibility with \TeX\ implementations that add already
+%    the `\file{.tex}' extension to \Com{jobname} (very rare):
+%    \begin{macrocode}
+%<latex>\newcommand*\MainFile{}
+\def\MainFile{\jobname.tex}
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\CurrentInput}
+%    Used to keep track of current input file name:
+%    \begin{macrocode}
+%<latex>\newcommand*\CurrentInput{}
+\gdef\CurrentInput{\MainFile}
+%    \end{macrocode}
+%    \end{macro}
+%    Command to customize WinEdt's log mode, and enable its input file
+%    tracking:
+%    \begin{macrocode}
+%<latex>\newcommand*\WinEdt{}
+\def\WinEdt#1{\typeout{:#1}}
+%    \end{macrocode}
+%    A hook for \package{soul}, which might otherwise break with
+%    a `reconstruction failed' error:
+%    \begin{macrocode}
+%<latex>\newcommand\src@AfterFi{}
+\def\src@AfterFi#1\fi{\fi#1}
+\AtBeginDocument{%
+%<latex>    \@ifpackageloaded{soul}{%
+%<tex>\ifx\SOUL@\relax
+%<tex>\else
+        \let\src@SOUL@\SOUL@
+        \def\SOUL@#1{%
+            \ifSRCOK
+                \SRCOKfalse\src@SOUL@{#1}\SRCOKtrue
+            \else
+                \src@AfterFi\src@SOUL@{#1}%
+            \fi
+        }%
+%<tex>\fi
+%<latex>    }{}%
+}
+%    \end{macrocode}
+%    \begin{macro}{\src@spec}
+%    Macro that actually inserts the special.
+%    \begin{macrocode}
+%<latex>\newcommand*\src@spec{}
+\def\src@spec{%
+    \ifSRCOK
+        \ifnum\inputlineno>\src@lastline
+            \global\src@lastline=\inputlineno
+            \src@debug{%
+                src:\the\inputlineno\src@maybe@space\CurrentInput}%
+            \special{src:\the\inputlineno\src@maybe@space\CurrentInput}%
+        \fi
+    \fi
+}
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\src@before@file@hook}
+%    \begin{macro}{\src@after@file@hook}
+%    Hooks executed before and after a level of input happens:
+%    \begin{macrocode}
+%<latex>\newcommand\src@before@file@hook{}
+%<latex>\newcommand\src@after@file@hook{}
+\def\src@before@file@hook#1{%
+%<latex>    \protected@xdef\CurrentInput{#1}%
+%<tex>    \xdef\CurrentInput{#1}%
+    \WinEdt{<+ \CurrentInput}%
+    \global\src@lastline=0
+    \ifSRCOK\special{src:1\CurrentInput}\fi
+}
+\def\src@after@file@hook#1{%
+    \WinEdt{<-}%
+    \global\src@lastline=\inputlineno
+    \global\advance\src@lastline by -1%
+    \gdef\CurrentInput{#1}%
+    \src@spec
+}
+%    \end{macrocode}
+%    \end{macro}
+%    \end{macro}
+%    \begin{macro}{\include}
+%    Redefine the original \Com{include} command. This is done for LaTeX only.
+%    The \file{.tex} extension is added to the argument.
+%    \begin{macrocode}
+%<*latex>
+\newcommand*\src@include{}
+\newcommand*\src@@include{}
+\let\src@include\include
+\AtBeginDocument{%
+    \def\include#1{%
+        \src@spec
+        \clearpage
+        \expandafter\src@@include\expandafter{\CurrentInput}{#1}%
+    }%
+}
+\def\src@@include#1#2{%
+    \src@before@file@hook{#2.tex}%
+    \src@include{#2}%
+    \src@after@file@hook{#1}%
+}
+%</latex>
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\input}
+%    For \Com{input}, we can only overload the LaTeX syntax, i.e. the usage
+%    with the argument in braces. For \TeX, we provide an alternative command
+%    \Com{Input} that can be used instead of \Com{input} (we can't redefine
+%    \Com{input}, since that is a \TeX\ primitive with a different way of parsing
+%    the argument line).
+%    No \file{.tex} extension is added to the argument.
+%    \begin{macrocode}
+%<*latex>
+\newcommand*\src@input{}
+\newcommand*\src@@input{}
+\newcommand*\src@@@input{}
+%</latex>
+\let\src@input\input
+%<*latex>
+\AtBeginDocument{%
+    \def\input{\src@spec\@ifnextchar\bgroup\src@@input\@@input}%
+}
+%    \end{macrocode}
+%    \Com{@@input} is \LaTeX's alias for \TeX's \Com{input} command.
+%    \begin{macrocode}
+\def\src@@input#1{%
+    \expandafter\src@@@input\expandafter{\CurrentInput}{#1}%
+}
+\def\src@@@input#1#2{%
+    \src@before@file@hook{#2}%
+    \src@input{#2}%
+    \src@after@file@hook{#1}%
+}
+%</latex>
+%    \end{macrocode}
+%    \end{macro}
+%    \begin{macro}{\Input}
+%    For plain TeX, we provide an alternative command \Com{Input} that can
+%    be used instead of \Com{input} (we can't redefine \Com{input}, since
+%    that is a \TeX\ primitive with a different way of parsing the argument line).
+%    \begin{macrocode}
+%<*tex>
+\def\Input#1{%
+    \expandafter\src@Input\expandafter{\CurrentInput}{#1}%
+}
+\def\src@Input#1#2{%
+    \src@before@file@hook{#2}%
+    \src@input #2
+    \src@after@file@hook{#1}%
+}
+%</tex>
+%    \end{macrocode}
+%    For \LaTeX, \Com{Input} is just an alias for \Com{input}:
+%    \begin{macrocode}
+%<*latex>
+\newcommand\Input{}
+\let\Input\input
+%</latex>
+%    \end{macrocode}
+%    \end{macro}
+%    Hook into `everypar'. This should concatenate the \Com{src@spec} with
+%    whatever those token lists contained before, just in case they were not
+%    empty token lists.  Of course, later definitions may undo all this...
+%
+%    The version with |\src@everypar| is sort of broken, e.g. it doesn't
+%    work with \package{doc.sty}. However the second version doesn't do
+%    anything useful at all \dots\ the current workaround is to use a package
+%    option to switch between the two. Patches are welcome.
+%    \begin{macrocode}
+\ifsrc@everypar@
+%<latex>    \newcommand*\src@everypar{}
+    \let\src@everypar\everypar
+    \newtoks\everypar
+    \src@everypar{\the\everypar\expandafter\src@spec}
+\else
+    \everypar\expandafter{\the\everypar\expandafter\src@spec}
+\fi
+%    \end{macrocode}
+%    Use the `nomath' option to disable the following:
+%    \begin{macrocode}
+\ifsrc@everymath@
+    \everymath\expandafter{\the\everymath\expandafter\src@spec}
+\fi
+%    \end{macrocode}
+%    \begin{macro}{\bibliography}
+%    Hook into the \Com{bibliography} command:
+%    \begin{macrocode}
+%<*latex>
+\newcommand*\src@bibliography{}
+\newcommand*\src@@bibliography{}
+\let\src@bibliography\bibliography
+\def\bibliography#1{%
+    \expandafter\src@@bibliography\expandafter{\CurrentInput}{#1}%
+}
+\def\src@@bibliography#1#2{%
+    \src@before@file@hook{\jobname.bbl}%
+    \src@bibliography{#2}%
+    \src@after@file@hook{#1}%
+}
+%</latex>
+%    \end{macrocode}
+%    \end{macro}
+%    Hook into output routine to turn off \Com{src@spec} while \Com{output} is active:
+%    \begin{macrocode}
+\output\expandafter{\expandafter\SRCOKfalse\the\output}
+%<tex>\catcode`\@=12
+%</package>
+%    \end{macrocode}
+% \Finale
+\endinput
