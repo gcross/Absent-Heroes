@@ -9,14 +9,14 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="gcross.20081101122204.1" str_leo_pos="3,0,1"><vh>@chapters</vh></v>
+<v t="gcross.20081101122204.1" str_leo_pos="3,0,2"><vh>@chapters</vh></v>
 <v t="gcross.20081101124804.1"><vh>@button Count Words</vh></v>
 <v t="gcross.20081101122204.7" a="E"><vh>@settings</vh>
 <v t="gcross.20081101122204.8"><vh>@font</vh></v>
 <v t="gcross.20081101122204.9"><vh>@enabled-plugins</vh></v>
 </v>
 <v t="gcross.20081101122204.4" a="E"
-expanded="gcross.20081101122204.2,gcross.20081101122204.5,gcross.20081108185724.9,"><vh>@thin story.tex</vh></v>
+expanded="gcross.20081101122204.2,"><vh>@thin story.tex</vh></v>
 </vnodes>
 <tnodes>
 <t tx="gcross.20081101122204.1"></t>
