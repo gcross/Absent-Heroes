@@ -9,21 +9,21 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="gcross.20081101122204.1" str_leo_pos="3,1,2,18"><vh>@chapters</vh></v>
+<v t="gcross.20081101122204.1" str_leo_pos="3,1,3,3"><vh>@chapters</vh></v>
 <v t="gcross.20081101124804.1"><vh>@button Count Words</vh></v>
 <v t="gcross.20081101122204.7" a="E"><vh>@settings</vh>
 <v t="gcross.20081101122204.8"><vh>@font</vh></v>
 <v t="gcross.20081101122204.9"><vh>@enabled-plugins</vh></v>
 </v>
 <v t="gcross.20081101122204.4" a="E"
-expanded="gcross.20081101122204.2,gcross.20081101122204.5,gcross.20081108185724.9,gcross.20081108185724.12,gcross.20081111232036.5,"><vh>@thin story.tex</vh></v>
+expanded="gcross.20081101122204.2,gcross.20081101122204.5,gcross.20081108185724.9,gcross.20081108185724.12,gcross.20081119221421.2,gcross.20081111232036.5,"><vh>@thin story.tex</vh></v>
 </vnodes>
 <tnodes>
 <t tx="gcross.20081101122204.1"></t>
 <t tx="gcross.20081101122204.7"></t>
 <t tx="gcross.20081101122204.8"># body_text_font_family = bitstream charter
 body_text_font_family = century schoolbook
-body_text_font_size = 16
+body_text_font_size = 20
 body_text_font_slant = None
 body_text_font_weight = None
 </t>
