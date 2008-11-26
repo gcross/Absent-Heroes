@@ -3,7 +3,7 @@
 <leo_file>
 <leo_header file_format="2" tnodes="0" max_tnode_index="0" clone_windows="0"/>
 <globals body_outline_ratio="0.5">
-	<global_window_position top="22" left="1" height="852" width="835"/>
+	<global_window_position top="25" left="10" height="713" width="1004"/>
 	<global_log_window_position top="0" left="0" height="0" width="0"/>
 </globals>
 <preferences/>
@@ -16,7 +16,7 @@
 <v t="gcross.20081101122204.9"><vh>@enabled-plugins</vh></v>
 </v>
 <v t="gcross.20081101122204.4" a="E"
-expanded="gcross.20081101122204.2,gcross.20081101122204.5,gcross.20081108185724.9,gcross.20081108185724.12,gcross.20081119221421.2,gcross.20081122135542.14,gcross.20081111232036.5,"><vh>@thin story.tex</vh></v>
+expanded="gcross.20081101122204.2,gcross.20081122135542.14,gcross.20081111232036.5,"><vh>@thin story.tex</vh></v>
 </vnodes>
 <tnodes>
 <t tx="gcross.20081101122204.1"></t>
