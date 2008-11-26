@@ -1,7 +1,7 @@
 <map version="0.8.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1224986822981" ID="Freemind_Link_418268625" MODIFIED="1224986830991" TEXT="NaNoWriMo">
-<node CREATED="1225075649416" ID="Freemind_Link_1950316839" MODIFIED="1225075653148" POSITION="right" TEXT="Characters">
+<node CREATED="1225075649416" FOLDED="true" ID="Freemind_Link_1950316839" MODIFIED="1225075653148" POSITION="right" TEXT="Characters">
 <node CREATED="1225075696796" ID="Freemind_Link_1086610337" MODIFIED="1225075716791" TEXT="Heroes">
 <node CREATED="1224986832608" ID="_" MODIFIED="1225075706767" TEXT="MC">
 <node CREATED="1224986843571" ID="Freemind_Link_566252059" MODIFIED="1224986852046" TEXT="wants to be a hero"/>
@@ -76,7 +76,7 @@
 </node>
 <node CREATED="1224987347001" ID="Freemind_Link_347902978" MODIFIED="1224987348185" POSITION="right" TEXT="Dare: Have a character (not necessarily the main character) complain that &quot;this scene wouldn&apos;t be in a good book&quot;)"/>
 <node CREATED="1224991602272" ID="Freemind_Link_1440428906" MODIFIED="1224991611852" POSITION="right" TEXT="Motif -- fantasy or sci-fi?  maybe a blend of both"/>
-<node CREATED="1225075853654" ID="Freemind_Link_561799160" MODIFIED="1225075856418" POSITION="left" TEXT="Plot ideas">
+<node CREATED="1225075853654" FOLDED="true" ID="Freemind_Link_561799160" MODIFIED="1225075856418" POSITION="left" TEXT="Plot ideas">
 <node CREATED="1224991059108" ID="Freemind_Link_1993271148" MODIFIED="1224991062824" TEXT="More plot points">
 <node CREATED="1224991508443" ID="Freemind_Link_1436670248" MODIFIED="1224991517776" TEXT="she gets fired, no longer gets public financing"/>
 <node CREATED="1224991522770" ID="Freemind_Link_614562683" MODIFIED="1224991528878" TEXT="someone questionable arrives, offers to team up with her"/>
@@ -132,6 +132,20 @@
 <node CREATED="1224994622174" ID="Freemind_Link_190280360" MODIFIED="1224994637929" TEXT="story could end with her getting hit on by a woman -- &quot;ah well, I guess you can&apos;t have everything&quot;"/>
 <node CREATED="1225075893901" ID="Freemind_Link_1433725995" MODIFIED="1225075908449" TEXT="kids invade her fortress;  she lets them win and then charges them for the experience"/>
 <node CREATED="1225075909148" ID="Freemind_Link_6419248" MODIFIED="1225075929160" TEXT="leftest peasants protest the hero tax, believing that they could just negotiate with the bad guys to make peace"/>
+</node>
+<node CREATED="1227662862618" ID="Freemind_Link_496936846" MODIFIED="1227662869578" POSITION="left" TEXT="Conversion">
+<node CREATED="1227662877966" ID="Freemind_Link_751489161" MODIFIED="1227662882361" TEXT="Jaw drop = laugh"/>
+<node CREATED="1227662884630" ID="Freemind_Link_690903189" MODIFIED="1227662888346" TEXT="Needs to be taught to laugh"/>
+<node CREATED="1227662888861" ID="Freemind_Link_1604029714" MODIFIED="1227662898672" TEXT="Need to hire minions"/>
+<node CREATED="1227662902093" ID="Freemind_Link_1855188033" MODIFIED="1227662907455" TEXT="Need to build and/or rent a fortress"/>
+<node CREATED="1227662908772" ID="Freemind_Link_1753432145" MODIFIED="1227662911297" TEXT="Need to attack people"/>
+<node CREATED="1227662984767" ID="Freemind_Link_631734280" MODIFIED="1227662990986" TEXT="How much do I want to describe of what&apos;s going on?">
+<node CREATED="1227662991294" ID="Freemind_Link_1240252860" MODIFIED="1227662998033" TEXT="Nothing -- skip directly to first attack"/>
+<node CREATED="1227662999910" ID="Freemind_Link_1835540055" MODIFIED="1227663028115" TEXT="Have Christina return to pick up all of her stuff?"/>
+</node>
+<node CREATED="1227663236065" ID="Freemind_Link_95013354" MODIFIED="1227663245028" TEXT="new lair -- built, rent, borrowed from the Shapeshifter?"/>
+<node CREATED="1227663482321" ID="Freemind_Link_370499434" MODIFIED="1227663491004" TEXT="should this take a lot of time, or should I do something to expediate the process?"/>
+<node CREATED="1227663655812" ID="Freemind_Link_1197573520" MODIFIED="1227663665216" TEXT="no killing -- I want people to live in fear of me, not to die in fear of me"/>
 </node>
 </node>
 </map>
